@@ -11,18 +11,19 @@ import java.time.format.DateTimeFormatter;
 @RestController
 public class HelloWorldController {
 
+
+    private final static LocalTime MORNING = LocalTime.of(8, 59);
+    private final static LocalTime NOON = LocalTime.of(17, 59);
+    private final static LocalTime NIGHT = LocalTime.of(23, 59);
+    private final static LocalTime MIDNIGHT = LocalTime.of(04, 00);
+
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+
     @GetMapping("/hello")
     public String hello() {
         String message = "hello world";
         return message;
     }
-
-    public final static LocalTime MORNING = LocalTime.of(8, 59);
-    public final static LocalTime NOON = LocalTime.of(17, 59);
-    public final static LocalTime NIGHT = LocalTime.of(23, 59);
-    public final static LocalTime MIDNIGHT = LocalTime.of(04, 00);
-
-    final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
 
     @GetMapping("/greeting")
@@ -30,7 +31,7 @@ public class HelloWorldController {
 
         LocalDateTime now = LocalDateTime.now();
 
-        String nowTime = now.format(timeFormat);
+        String nowTime = now.format(TIME_FORMATTER);
 
         LocalTime nowLocalTime = now.toLocalTime();
 

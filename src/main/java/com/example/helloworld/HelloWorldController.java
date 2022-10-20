@@ -17,12 +17,12 @@ public class HelloWorldController {
         return message;
     }
 
-    final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-
     public final static LocalTime MORNING = LocalTime.of(8, 59);
     public final static LocalTime NOON = LocalTime.of(17, 59);
     public final static LocalTime NIGHT = LocalTime.of(23, 59);
     public final static LocalTime MIDNIGHT = LocalTime.of(04, 00);
+
+    final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 
 
     @GetMapping("/greeting")
@@ -32,7 +32,7 @@ public class HelloWorldController {
 
         String nowTime = now.format(timeFormat);
 
-        LocalTime nowLocalTime = LocalTime.now();
+        LocalTime nowLocalTime = now.toLocalTime();
 
         //04:00から08:59までは「おはようございます」を表示
         if (country.equals("japan") && nowLocalTime.isAfter(MIDNIGHT) && nowLocalTime.isBefore(MORNING) || nowLocalTime.equals(MORNING) || nowLocalTime.equals(MIDNIGHT)) {
@@ -61,7 +61,4 @@ public class HelloWorldController {
         return null;
     }
 
-
 }
-
-
